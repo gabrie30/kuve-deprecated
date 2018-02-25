@@ -2,6 +2,7 @@ require "./namespaces.cr"
 require "./restarts.cr"
 require "./nodes.cr"
 require "./db-con.cr"
+require "./open.cr"
 require "./exec.cr"
 require "colorize"
 require "json"
@@ -35,6 +36,7 @@ if ARGV.size == 0 || ARGV[0] == "-h" || ARGV[0] == "h" || ARGV[0] == "--help"
   puts "$ kuve nodes                        shows all warning and error messages for all nodes in a project"
   puts "$ kuve db-con <project> <namespace> connects you to the cloud-sql-proxy for that namespace's db"
   puts "$ kuve exec <namespace>             provides string to exec into pod"
+  puts "$ kuve o <project keyword>          opens the project specified by kuve.conf in your web browser"
   puts ""
   puts ""
 elsif ARGV[0] == "nodes"
@@ -61,6 +63,9 @@ elsif ARGV[0] == "restarts"
   else
     a.show_all_restarts("top")
   end
+elsif ARGV[0] == "o"
+  o = Open.new(ARGV[1])
+  o.open
 else
   na = Namespace.new
   na.get_all_pods_all_namespaces_all_envs

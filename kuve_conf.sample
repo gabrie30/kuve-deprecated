@@ -18,5 +18,11 @@
   "db-con": {
     "service_account_directory": "absolute-path-to-your-cloud-sql-service-accounts",
     "apps_directory": "absolute-path-to-your-app-repos"
+  },
+  "open": {
+    "dev": "https://www.heroku.com",
+    "staging": "...",
+    "sandbox": "...",
+    "production": "https://console.cloud.google.com/production"
   }
 }

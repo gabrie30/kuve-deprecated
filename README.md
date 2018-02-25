@@ -23,9 +23,19 @@ Easily view important debugging information over multiple environments.
 - $ Update your kuve_conf.json (see Steps to get db-con working)
 - $ make update
 
-## List available commands
+## Available commands
 
-- $ kuve -h
+```
+$ kuve -h                           shows this message
+$ kuve <namespace>                  shows all pods in a namespace for each project
+$ kuve restarts                     shows top six pod restarts in namespace and node
+$ kuve restarts -a                  shows all pod restarts in namespace and node
+$ kuve nodes                        shows all warning and error messages for all nodes in a project
+$ kuve db-con <project> <namespace> connects you to the cloud-sql-proxy for that namespace's db
+$ kuve exec <namespace>             provides string to exec into pod
+$ kuve o <project keyword>          opens the project specified by kuve.conf in your web browser
+```
+
 
 ## Steps to get db-con working
 
