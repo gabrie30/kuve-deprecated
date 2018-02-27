@@ -8,10 +8,8 @@ class DBCon
     service_account_directory = JSON.parse(File.open("/usr/local/bin/kuve_conf.json"))["db-con"]["service_account_directory"]
     apps_directory = JSON.parse(File.open("/usr/local/bin/kuve_conf.json"))["db-con"]["apps_directory"]
 
-    # Does not currently support more than one region
-    # Your kuve_conf.json setting for this can be dynamic
-    # eg: db_conn_string: "#{@project}:us-region:#{@namespace}"
-    db_con_string = JSON.parse(File.open("/usr/local/bin/kuve_conf.json"))["db-con"]["db_con_string"]
+    # limited support for now
+    db_con_string = "#{@project}:us-central1:#{@namespace}01"
 
     app_decrypt = "#{apps_directory}/#{@namespace}/config/deploy/#{@project}/secrets.ejson"
     full_service_account_directory = "#{service_account_directory}/#{@project}.json"
