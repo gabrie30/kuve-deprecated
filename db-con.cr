@@ -11,7 +11,7 @@ class DBCon
     # Does not currently support more than one region
     # Your kuve_conf.json setting for this can be dynamic
     # eg: db_conn_string: "#{@project}:us-region:#{@namespace}"
-    db_con_string = JSON.parse(File.open("/usr/local/bin/kuve_conf.json"))["db-con"]["db_conn_string"]
+    db_con_string = JSON.parse(File.open("/usr/local/bin/kuve_conf.json"))["db-con"]["db_con_string"]
 
     app_decrypt = "#{apps_directory}/#{@namespace}/config/deploy/#{@project}/secrets.ejson"
     full_service_account_directory = "#{service_account_directory}/#{@project}.json"
@@ -22,6 +22,6 @@ class DBCon
     system("echo psql -U USER_NAME -h 127.0.0.1 -p 15432 DB_NAME")
     system("echo")
     system("echo make sure you use port 15432 to connect!")
-    system("cloud_sql_proxy -credential_file #{full_service_account_directory} -instances=#{db_conn_string}=tcp:127.0.0.1:15432")
+    system("cloud_sql_proxy -credential_file #{full_service_account_directory} -instances=#{db_con_string}=tcp:127.0.0.1:15432")
   end
 end
