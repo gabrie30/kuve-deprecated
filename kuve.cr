@@ -11,6 +11,13 @@ require "json"
 # Have a command for a project (eg kubectl get pods --all-namespaces)
 # kubectl get events --namespace=balh
 
+# Grab the context set it as global variable
+if ARGV.size > 1 && ARGV[-2] == "-c"
+  context = ARGV[-1]
+else
+  context = "default"
+end
+
 if ARGV.size == 0 || ARGV[0] == "-h" || ARGV[0] == "h" || ARGV[0] == "--help"
   # puts ""
   # puts "*****************************************************************".colorize.yellow
@@ -38,9 +45,11 @@ if ARGV.size == 0 || ARGV[0] == "-h" || ARGV[0] == "h" || ARGV[0] == "--help"
   puts "$ kuve exec <namespace>             provides string to exec into pod"
   puts "$ kuve o <project keyword>          opens the project specified by kuve.conf in your web browser"
   puts ""
+  puts "Note: To use other context groups use -c at the end of your command eg;"
+  puts "$ kuve restarts -a -c my-context-group"
   puts ""
 elsif ARGV[0] == "nodes"
-  no = Nodes.new
+  no = Nodes.new(context)
   no.get_all_nodes
 elsif ARGV[0] == "exec"
   if ARGV[1]
@@ -57,7 +66,7 @@ elsif ARGV[0] == "db-con"
     puts "Needs to be like $ kuve db-con <project> <namespace>"
   end
 elsif ARGV[0] == "restarts"
-  a = Restarts.new
+  a = Restarts.new(context)
   if (ARGV.size > 1) && (ARGV[1] == "-a" || ARGV[1] == "a")
     a.show_all_restarts("all")
   else
@@ -67,6 +76,6 @@ elsif ARGV[0] == "o"
   o = Open.new(ARGV[1])
   o.open
 else
-  na = Namespace.new
+  na = Namespace.new(context)
   na.get_all_pods_all_namespaces_all_envs
 end

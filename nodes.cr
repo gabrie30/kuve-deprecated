@@ -1,21 +1,18 @@
 class Nodes
-  def initialize
+  def initialize(context : String)
     @data = Array(String).new
+    @context = context
   end
 
   def contexts
     # If no context flag is supplied just use default
-    JSON.parse(File.open("/usr/local/bin/kuve_conf.json"))["contexts"]["default"]
-  end
-
-  def get_project_name(con)
-    con.to_s.split(" ").last
+    JSON.parse(File.open("/usr/local/bin/kuve_conf.json"))["rawcontexts"]["#{@context}"]
   end
 
   def get_all_nodes
     contexts.each do |con|
       `#{con} 2>&1 > /dev/null`
-      puts "Checking Nodes in: #{get_project_name(con)}"
+      puts "Checking Nodes in: #{con}"
       nodes_data = `kubectl get nodes -o=json`
       nodes = JSON.parse(nodes_data)
       nodes["items"].each do |node|

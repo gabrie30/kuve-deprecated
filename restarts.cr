@@ -1,11 +1,12 @@
 class Restarts
-  def initialize
+  def initialize(context : String)
     @data = Array(String).new
+    @context = context
   end
 
   def contexts
     # If no context flag is supplied just use default
-    JSON.parse(File.open("/usr/local/bin/kuve_conf.json"))["contexts"]["default"]
+    JSON.parse(File.open("/usr/local/bin/kuve_conf.json"))["rawcontexts"][@context]
   end
 
   def get_project_name(con)
@@ -14,17 +15,17 @@ class Restarts
 
   def show_all_restarts(number)
     contexts.each do |con|
-      `#{con} 2>&1 > /dev/null`
-      puts "-------------------- Checking Pod Restarts on Nodes and Namespaces: #{get_project_name(con)} --------------------"
+      puts "#{con}"
+      puts "-------------------- Checking Pod Restarts on Nodes and Namespaces: #{con} --------------------"
       puts ""
-      all_data = `kubectl get pods --all-namespaces -o=json`
+      all_data = `kubectl get pods --all-namespaces -o=json --context=#{con}`
       data = JSON.parse(all_data)
       app_data = get_app_restarts(data, number)
       node_data = get_node_restarts(data, number)
       print_all_node_data(node_data)
       print_all_app_data(app_data)
     end
-    puts "$ kubectl get pods --all-namespaces -o wide"
+    puts "$ kubectl get pods --all-namespaces -o wide --context=your-multiple-contexts-in-#{@context}"
   end
 
   def sum_restarts(app)

@@ -34,6 +34,9 @@ $ kuve nodes                        shows all warning and error messages for all
 $ kuve db-con <project> <namespace> connects you to the cloud-sql-proxy for that namespace's db
 $ kuve exec <namespace>             provides string to exec into pod
 $ kuve o <project keyword>          opens the project specified by kuve.conf in your web browser
+
+Note: To use other contexts groups use -c at the end of your command eg;
+$ kuve restarts -a -c my-context-group
 ```
 
 
@@ -45,10 +48,12 @@ $ kuve o <project keyword>          opens the project specified by kuve.conf in 
 - If the db-con fails to run correctly, check that you have the repo cloned to the apps directory and that you have the service account for the project in the right directory
 - Database region is limited to us-west1 (TODO Fix)
 
+## Context groups
+
+- You can setup multiple context groupings in your kuve_conf.json. This allows you to iterate over groupings of kubernetes contexts
 
 ## Todo
 
-- Use multiple contexts
 - Better Error Messages
 - More Functionality (Ideas/PR's Welcome)
 
