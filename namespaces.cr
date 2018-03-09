@@ -11,12 +11,13 @@ class Namespace
     end
   end
 
-  def initialize
+  def initialize(context : String)
+    @context = context
     @data = Array(String).new
   end
 
   def contexts
-    JSON.parse(File.open("/usr/local/bin/kuve_conf.json"))["rawcontexts"]["default"].map { |value| value.to_s }
+    JSON.parse(File.open("/usr/local/bin/kuve_conf.json"))["rawcontexts"][@context].map { |value| value.to_s }
   end
 
   def get_deployed_image(context)
