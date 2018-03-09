@@ -15,7 +15,6 @@ class Restarts
 
   def show_all_restarts(number)
     contexts.each do |con|
-      puts "#{con}"
       puts "-------------------- Checking Pod Restarts on Nodes and Namespaces: #{con} --------------------"
       puts ""
       all_data = `kubectl get pods --all-namespaces -o=json --context=#{con}`
@@ -57,7 +56,7 @@ class Restarts
       return node_to_restarts.to_a.sort_by { |(x, y)| y }.reverse
     end
 
-    node_to_restarts.to_a.sort_by { |(x, y)| y }[-6..-1].reverse
+    node_to_restarts.to_a.sort_by { |(x, y)| y }[-5..-1].reverse
   end
 
   def get_app_restarts(data, number)
@@ -81,7 +80,7 @@ class Restarts
       return app_to_restarts.to_a.sort_by { |(x, y)| y }.reverse
     end
 
-    app_to_restarts.to_a.sort_by { |(x, y)| y }[-6..-1].reverse
+    app_to_restarts.to_a.sort_by { |(x, y)| y }[-5..-1].reverse
   end
 
   def print_all_app_data(app_data)
