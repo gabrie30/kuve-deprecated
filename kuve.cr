@@ -18,7 +18,17 @@ else
   context = "default"
 end
 
+def print_logo
+  logo = AnimatedLogo.new
+  sleep 1
+  logo.stop
+end
+
 def print_kuve_context
+  puts ""
+
+  print_logo
+
   conf = JSON.parse(File.open("/usr/local/bin/kuve_conf.json"))
   puts ""
   puts "-- Additonal Context Groups --"
@@ -31,7 +41,7 @@ def print_kuve_context
 
   puts "-- Open Shortcuts --"
   conf["open"].each do |key, value|
-    puts " * #{key}"
+    puts " * #{key} -> #{value}"
   end
 
   puts ""
@@ -50,9 +60,7 @@ if ARGV.size == 0 || ARGV[0] == "-h" || ARGV[0] == "h" || ARGV[0] == "--help"
   # puts "###    ###       ########         ###           ##########      ".colorize.light_yellow
   # puts ""
   # puts "*****************************************************************".colorize.yellow
-  logo = AnimatedLogo.new
-  sleep 1
-  logo.stop
+  print_logo
 
   puts ""
   puts "$ kuve -h                           shows this message"
