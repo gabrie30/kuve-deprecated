@@ -18,6 +18,25 @@ else
   context = "default"
 end
 
+def print_kuve_context
+  conf = JSON.parse(File.open("/usr/local/bin/kuve_conf.json"))
+  puts ""
+  puts "-- Additonal Context Groups --"
+  conf["rawcontexts"].each do |key, value|
+    next if key == "default"
+    puts " * #{key}"
+  end
+
+  puts ""
+
+  puts "-- Open Shortcuts --"
+  conf["open"].each do |key, value|
+    puts " * #{key}"
+  end
+
+  puts ""
+end
+
 if ARGV.size == 0 || ARGV[0] == "-h" || ARGV[0] == "h" || ARGV[0] == "--help"
   # puts ""
   # puts "*****************************************************************".colorize.yellow
@@ -44,13 +63,13 @@ if ARGV.size == 0 || ARGV[0] == "-h" || ARGV[0] == "h" || ARGV[0] == "--help"
   puts "$ kuve db-con <project> <namespace> connects you to the cloud-sql-proxy for that namespace's db"
   puts "$ kuve exec <namespace>             provides string to exec into pod"
   puts "$ kuve o <project keyword>          opens the project specified by kuve.conf in your web browser"
-  puts "$ kuve conf                         view your configuration file"
+  puts "$ kuve conf                         view your configuration shortcuts"
   puts ""
   puts "Note: To use other context groups use -c at the end of your command eg;"
   puts "$ kuve restarts -a -c my-context-group"
   puts ""
 elsif ARGV[0] == "conf"
-  system("cat /usr/local/bin/kuve_conf.json")
+  print_kuve_context
 elsif ARGV[0] == "nodes"
   no = Nodes.new(context)
   no.get_all_nodes
