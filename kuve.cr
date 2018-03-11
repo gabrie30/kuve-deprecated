@@ -4,6 +4,7 @@ require "./nodes.cr"
 require "./db-con.cr"
 require "./open.cr"
 require "./exec.cr"
+require "./exposed.cr"
 require "colorize"
 require "json"
 
@@ -64,23 +65,28 @@ if ARGV.size == 0 || ARGV[0] == "-h" || ARGV[0] == "h" || ARGV[0] == "--help"
 
   puts ""
   puts "$ kuve -h                           shows this message"
-  puts "$ kuve <namespace>                  shows all pods in a namespace for each project"
-  puts "$ kuve restarts                     shows top six pod restarts in namespace and node"
-  puts "$ kuve restarts -a                  shows all pod restarts in namespace and node"
-  puts "$ kuve nodes                        shows all warning and error messages for all nodes in a project"
+  puts "$ kuve exposed [-c]                 shows all externally faceing endpoints"
+  puts "$ kuve <namespace> [-c]             shows all pods in a namespace for each project"
+  puts "$ kuve restarts [-c]                shows top six pod restarts in namespace and node"
+  puts "$ kuve restarts -a [-c]             shows all pod restarts in namespace and node"
+  puts "$ kuve nodes [-c]                   shows all warning and error messages for all nodes in a project"
   puts "$ kuve db-con <project> <namespace> connects you to the cloud-sql-proxy for that namespace's db"
   puts "$ kuve exec <namespace>             provides string to exec into pod"
   puts "$ kuve o <project keyword>          opens the project specified by kuve.conf in your web browser"
   puts "$ kuve conf                         view your configuration shortcuts"
   puts ""
-  puts "Note: To use other context groups use -c at the end of your command eg;"
+  puts "[-c] optional flag to indicate context group which is set in kuve_conf.json, defaults to default context group"
   puts "$ kuve restarts -a -c my-context-group"
+  puts "will show you all restarts over all contexts within that context group"
   puts ""
 elsif ARGV[0] == "conf"
   print_kuve_context
 elsif ARGV[0] == "nodes"
   no = Nodes.new(context)
   no.get_all_nodes
+elsif ARGV[0] == "exposed"
+  e = Exposed.new(context)
+  e.get_all_exposed
 elsif ARGV[0] == "exec"
   if ARGV[1]
     e = Exec.new(ARGV[1])
