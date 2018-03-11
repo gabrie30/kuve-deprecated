@@ -27,16 +27,19 @@ Easily view important debugging information over multiple environments.
 
 ```
 $ kuve -h                           shows this message
-$ kuve <namespace>                  shows all pods in a namespace for each project
-$ kuve restarts                     shows top six pod restarts in namespace and node
-$ kuve restarts -a                  shows all pod restarts in namespace and node
-$ kuve nodes                        shows all warning and error messages for all nodes in a project
+$ kuve exposed [-c]                 shows all externally faceing endpoints
+$ kuve <namespace> [-c]             shows all pods in a namespace for each project
+$ kuve restarts [-c]                shows top six pod restarts in namespace and node
+$ kuve restarts -a [-c]             shows all pod restarts in namespace and node
+$ kuve nodes [-c]                   shows all warning and error messages for all nodes in a project
 $ kuve db-con <project> <namespace> connects you to the cloud-sql-proxy for that namespace's db
 $ kuve exec <namespace>             provides string to exec into pod
 $ kuve o <project keyword>          opens the project specified by kuve.conf in your web browser
+$ kuve conf                         view your configuration shortcuts
 
-Note: To use other contexts groups use -c at the end of your command eg;
+[-c] optional flag to indicate context group which is set in kuve_conf.json, defaults to default context group
 $ kuve restarts -a -c my-context-group
+will show you all restarts over all contexts within that context group
 ```
 
 
