@@ -5,7 +5,17 @@
       "gke_staging_us-west1-a_staging-environment",
       "gke_sandbox_us-west1-b_sandbox-environment",
     ],
-    "another_context_group": [],
+    "tooling_context_group": [
+      "gke_tooling-us-west1c-staging",
+      "gke_tooling-us-west1c-production"
+    ],
+    "all":[
+      "gke_production_us-west1-a_production-environment",
+      "gke_staging_us-west1-a_staging-environment",
+      "gke_sandbox_us-west1-b_sandbox-environment",
+      "gke_tooling-us-west1c-staging",
+      "gke_tooling-us-west1c-production"
+    ]
   },
   "db-con": {
     "service_account_directory": "absolute-path-to-your-cloud-sql-service-accounts",
