@@ -37,9 +37,7 @@ $ kuve exec <namespace>             provides string to exec into pod
 $ kuve o <project keyword>          opens the project specified by kuve.conf in your web browser
 $ kuve conf                         view your configuration shortcuts
 
-[-c] optional flag to indicate context group which is set in kuve_conf.json, defaults to default context group
-$ kuve restarts -a -c my-context-group
-will show you all restarts over all contexts within that context group
+[-c] optional flag to indicate context groups which is set in kuve_conf.json
 ```
 
 
