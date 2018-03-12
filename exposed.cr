@@ -12,7 +12,7 @@ class Exposed
 
   def get_all_exposed
     contexts.each do |context|
-      puts "--------------------------------------- Externally Endpoints in #{context} ---------------------------------------"
+      puts "--------------------------------------- External Endpoints in #{context} ---------------------------------------"
       puts ""
       puts "## Ingresses ##"
       puts ""
