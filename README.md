@@ -27,7 +27,7 @@ Easily view important debugging information over multiple environments.
 
 ```
 $ kuve -h                           shows this message
-$ kuve exposed [-c]                 shows all externally faceing endpoints
+$ kuve exposed [-c]                 shows all externally facing endpoints
 $ kuve <namespace> [-c]             shows all pods in a namespace for each project
 $ kuve restarts [-c]                shows top six pod restarts in namespace and node
 $ kuve restarts -a [-c]             shows all pod restarts in namespace and node
