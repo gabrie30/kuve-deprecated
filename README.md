@@ -40,10 +40,9 @@ $ kuve conf                         view your configuration shortcuts
 [-c] optional flag to indicate context groups which is set in kuve_conf.json
 ```
 
-
 ## Steps to get db-con working
 
-- You will need to have all your apps in one directory
+- You will need to have all your apps in one directory (see Apps Directory)
 - You will need to add a directory with all psql-service-accounts.json - this is needed to connect to the proxy
 - Update the kuve_conf.json to include these two paths
 - If the db-con fails to run correctly, check that you have the repo cloned to the apps directory and that you have the service account for the project in the right directory
@@ -52,6 +51,10 @@ $ kuve conf                         view your configuration shortcuts
 ## Context groups
 
 - You can setup multiple context groupings in your kuve_conf.json. This allows you to iterate over groupings of kubernetes contexts
+
+## Apps directory
+
+- kuve requires an apps_directory set in kuve_conf.json for db_con functionality. If you don't have one directory that holds all your orgs repos you can use a tool like ghorg to make it for you. <https://github.com/gabrie30/ghorg>
 
 ## Todo
 
