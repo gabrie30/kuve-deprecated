@@ -12,7 +12,7 @@
 *****************************************************************
 ```
 
-Easily view important debugging information over multiple environments.
+Easily view important debugging information over multiple Kubernetes clusters.
 
 # Installation
 
