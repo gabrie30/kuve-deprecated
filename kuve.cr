@@ -5,6 +5,7 @@ require "./db-con.cr"
 require "./open.cr"
 require "./exec.cr"
 require "./exposed.cr"
+require "./crashed.cr"
 require "colorize"
 require "json"
 
@@ -65,6 +66,7 @@ if ARGV.size == 0 || ARGV[0] == "-h" || ARGV[0] == "h" || ARGV[0] == "--help"
 
   puts ""
   puts "$ kuve -h                           shows this message"
+  puts "$ kuve crashed [-c]                 shows all pods in a project that are not running"
   puts "$ kuve exposed [-c]                 shows all externally faceing endpoints"
   puts "$ kuve <namespace> [-c]             shows all pods in a namespace for each project"
   puts "$ kuve restarts [-c]                shows top six pod restarts in namespace and node"
@@ -81,6 +83,9 @@ if ARGV.size == 0 || ARGV[0] == "-h" || ARGV[0] == "h" || ARGV[0] == "--help"
   puts ""
 elsif ARGV[0] == "conf"
   print_kuve_context
+elsif ARGV[0] == "crashed"
+  c = Crashed.new(context)
+  c.get_all_crashed_pods
 elsif ARGV[0] == "nodes"
   no = Nodes.new(context)
   no.get_all_nodes
