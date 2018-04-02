@@ -27,6 +27,7 @@ Easily view important debugging information over multiple Kubernetes clusters.
 
 ```
 $ kuve -h                           shows this message
+$ kuve crashed                      shows all pods in a project that are not running
 $ kuve exposed [-c]                 shows all externally facing endpoints
 $ kuve <namespace> [-c]             shows all pods in a namespace for each project
 $ kuve restarts [-c]                shows top six pod restarts in namespace and node
