@@ -6,6 +6,7 @@ require "./open.cr"
 require "./exec.cr"
 require "./exposed.cr"
 require "./crashed.cr"
+require "./top.cr"
 require "colorize"
 require "json"
 
@@ -67,6 +68,7 @@ if ARGV.size == 0 || ARGV[0] == "-h" || ARGV[0] == "h" || ARGV[0] == "--help"
   puts ""
   puts "$ kuve -h                           shows this message"
   puts "$ kuve crashed [-c]                 shows all pods in a project that are not running"
+  puts "$ kuve top <pods> || <nodes> [-c]   shows kubectl top for pods or nodes"
   puts "$ kuve exposed [-c]                 shows all externally faceing endpoints"
   puts "$ kuve <namespace> [-c]             shows all pods in a namespace for each project"
   puts "$ kuve restarts [-c]                shows top six pod restarts in namespace and node"
@@ -83,6 +85,16 @@ if ARGV.size == 0 || ARGV[0] == "-h" || ARGV[0] == "h" || ARGV[0] == "--help"
   puts ""
 elsif ARGV[0] == "conf"
   print_kuve_context
+elsif ARGV[0] == "top"
+  if ARGV[1] == "nodes" || ARGV[1] == "node" || ARGV[1] == "-n"
+    t = Top.new(context, "node")
+    t.run_top
+  elsif ARGV[1] == "pods" || ARGV[1] == "pod" || ARGV[1] == "-p"
+    t = Top.new(context, "pod")
+    t.run_top
+  else
+    puts "You need to specify nodes or pods"
+  end
 elsif ARGV[0] == "crashed"
   c = Crashed.new(context)
   c.get_all_crashed_pods
