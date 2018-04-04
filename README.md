@@ -27,8 +27,9 @@ Easily view important debugging information over multiple Kubernetes clusters.
 
 ```
 $ kuve -h                           shows this message
-$ kuve crashed                      shows all pods in a project that are not running
-$ kuve exposed [-c]                 shows all externally facing endpoints
+$ kuve crashed [-c]                 shows all pods in a project that are not running
+$ kuve top <pods> || <nodes> [-c]   shows kubectl top for pods or nodes
+$ kuve exposed [-c]                 shows all externally faceing endpoints
 $ kuve <namespace> [-c]             shows all pods in a namespace for each project
 $ kuve restarts [-c]                shows top six pod restarts in namespace and node
 $ kuve restarts -a [-c]             shows all pod restarts in namespace and node
@@ -38,7 +39,9 @@ $ kuve exec <namespace>             provides string to exec into pod
 $ kuve o <project keyword>          opens the project specified by kuve.conf in your web browser
 $ kuve conf                         view your configuration shortcuts
 
-[-c] optional flag to indicate context groups which is set in kuve_conf.json
+[-c] optional flag to indicate context group which is set in kuve_conf.json, defaults to default context group
+$ kuve restarts -a -c my-context-group
+will show you all restarts over all contexts within that context group
 ```
 
 ## Steps to get db-con working
