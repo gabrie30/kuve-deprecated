@@ -125,7 +125,7 @@ elsif ARGV[0] == "restarts"
   else
     a.show_all_restarts("top")
   end
-elsif ARGV[0] == "o"
+elsif ARGV[0] == "-o" || ARGV[0] == "open" || ARGV[0] == "o"
   o = Open.new(ARGV[1])
   o.open
 else

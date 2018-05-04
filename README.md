@@ -37,7 +37,7 @@ $ kuve restarts -a [-c]             shows all pod restarts in namespace and node
 $ kuve nodes [-c]                   shows all warning and error messages for all nodes in a project
 $ kuve db-con <project> <namespace> connects you to the cloud-sql-proxy for that namespace's db
 $ kuve exec <namespace>             provides string to exec into pod
-$ kuve o <project keyword>          opens the project specified by kuve.conf in your web browser
+$ kuve open <project/github>        opens a project in browser if specified by kuve.conf or defaults to github repo
 $ kuve conf                         view your configuration shortcuts
 
 [-c] optional flag to indicate context group which is set in kuve_conf.json, defaults to default context group

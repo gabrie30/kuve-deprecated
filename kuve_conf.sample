@@ -25,6 +25,7 @@
     "dev": "https://www.heroku.com",
     "staging": "...",
     "sandbox": "...",
-    "production": "https://console.cloud.google.com/production"
+    "production": "https://console.cloud.google.com/production",
+    "github_org": "github-org-to-open-repos-from"
   }
 }
