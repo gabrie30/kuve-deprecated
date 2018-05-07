@@ -105,8 +105,11 @@ elsif ARGV[0] == "exposed"
   e = Exposed.new(context)
   e.get_all_exposed
 elsif ARGV[0] == "exec"
-  if ARGV[1]
-    e = Exec.new(ARGV[1])
+  if ARGV.size == 3
+    e = Exec.new(ARGV[1], ARGV[2])
+    e.exec_into_pod
+  elsif ARGV.size == 2
+    e = Exec.new(ARGV[1], "false")
     e.exec_into_pod
   else
     puts "You need to specify a namespace"

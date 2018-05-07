@@ -1,6 +1,22 @@
 class Exec
-  def initialize(namespace : String)
+  def initialize(namespace : String, chosen_shell : String)
     @namespace = namespace
+
+    if chosen_shell == "false"
+      @shell = default_shell
+    else
+      @shell = chosen_shell
+    end
+  end
+
+  def default_shell
+    # If no context flag is supplied just use default
+    begin
+      JSON.parse(File.open("/usr/local/bin/kuve_conf.json"))["shell"]["exec-default"].to_s
+    rescue
+      puts "WARNING: exec-default not set in kuve_conf.json or json is malformed - reference kuve_conf.sample defualting to /bin/sh as default"
+      return "/bin/sh"
+    end
   end
 
   def exec_into_pod
@@ -8,9 +24,9 @@ class Exec
     env = `kubectl config current-context`
     puts "###### Running the following command in  #{env.chomp}  ######"
     puts ""
-    puts "$ kubectl exec -it #{pod_name} -n #{@namespace} -- /bin/bash"
+    puts "$ kubectl exec -it #{pod_name} -n #{@namespace} -- #{@shell}"
     puts ""
-    system("kubectl exec -it #{pod_name} -n #{@namespace} -- /bin/bash")
+    system("kubectl exec -it #{pod_name} -n #{@namespace} -- #{@shell}")
   end
 
   def get_pod_name
