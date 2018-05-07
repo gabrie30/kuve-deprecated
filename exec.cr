@@ -11,7 +11,12 @@ class Exec
 
   def default_shell
     # If no context flag is supplied just use default
-    JSON.parse(File.open("/usr/local/bin/kuve_conf.json"))["shell"]["exec-default"].to_s
+    begin
+      JSON.parse(File.open("/usr/local/bin/kuve_conf.json"))["shell"]["exec-default"].to_s
+    rescue
+      puts "WARNING: exec-default not set in kuve_conf.json or json is malformed - reference kuve_conf.sample defualting to /bin/sh as default"
+      return "/bin/sh"
+    end
   end
 
   def exec_into_pod
