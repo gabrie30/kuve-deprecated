@@ -14,6 +14,13 @@ require "json"
 # Have a command for a project (eg kubectl get pods --all-namespaces)
 # kubectl get events --namespace=balh
 
+begin
+  File.open("/usr/local/bin/kuve_conf.json")
+rescue
+  puts "Missing kuve_conf.json please see kuve_conf.sample"
+  exit(1)
+end
+
 # Grab the context set it as global variable
 if ARGV.size > 1 && ARGV[-2] == "-c"
   context = ARGV[-1]
