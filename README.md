@@ -32,11 +32,10 @@ $ kuve crashed [-c]                 shows all pods in a project that are not run
 $ kuve top <pods> || <nodes> [-c]   shows kubectl top for pods or nodes
 $ kuve exposed [-c]                 shows all externally facing endpoints
 $ kuve <namespace> [-c]             shows all pods in a namespace for each project
-$ kuve restarts [-c]                shows top six pod restarts in namespace and node
 $ kuve restarts -a [-c]             shows all pod restarts in namespace and node
 $ kuve nodes [-c]                   shows all warning and error messages for all nodes in a project
 $ kuve db-con <project> <namespace> connects you to the cloud-sql-proxy for that namespace's db
-$ kuve exec <namespace>             provides string to exec into pod
+$ kuve exec <namespace>             exec into first running container of first pod found
 $ kuve open <project/github>        opens a project in browser if specified by kuve.conf or defaults to github repo
 $ kuve conf                         view your configuration shortcuts
 
