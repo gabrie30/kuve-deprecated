@@ -11,7 +11,8 @@ class DBCon
     # limited support for now
     db_con_string = "#{@project}:us-central1:#{@namespace}01"
 
-    app_decrypt = "#{apps_directory}/#{@namespace}/config/deploy/#{@project}/secrets.ejson"
+    # TODO: needs to be pulled out to env var
+    app_decrypt = "#{apps_directory}/#{@namespace}/#{@project}/secrets.ejson"
     full_service_account_directory = "#{service_account_directory}/#{@project}.json"
 
     system("ejson decrypt #{app_decrypt}")
