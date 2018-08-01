@@ -28,7 +28,7 @@ class Secrets
                 puts "#{key}: #{decrypted}"
             end
         rescue
-            puts "Could Not parse secrets, please ensure you entered a valid namespace or secret name for the namespace."
+            puts "Could not parse secrets, please ensure you entered a valid namespace or secret name for the namespace."
         end
     end
 end
