@@ -7,6 +7,7 @@ require "./exec.cr"
 require "./exposed.cr"
 require "./crashed.cr"
 require "./top.cr"
+require "./secrets.cr"
 require "colorize"
 require "json"
 
@@ -81,6 +82,7 @@ if ARGV.size == 0 || ARGV[0] == "-h" || ARGV[0] == "h" || ARGV[0] == "--help"
   puts "$ kuve restarts [-c]                shows top six pod restarts in namespace and node"
   puts "$ kuve restarts -a [-c]             shows all pod restarts in namespace and node"
   puts "$ kuve nodes [-c]                   shows all warning and error messages for all nodes in a project"
+  puts "$ kuve secrets <namespace>          shows secrets for a given namespace, decrypted from base64"
   puts "$ kuve db-con <project> <namespace> connects you to the cloud-sql-proxy for that namespace's db"
   puts "$ kuve exec <namespace>             provides string to exec into pod"
   puts "$ kuve o <project keyword>          opens the project specified by kuve.conf in your web browser"
@@ -111,6 +113,13 @@ elsif ARGV[0] == "nodes"
 elsif ARGV[0] == "exposed"
   e = Exposed.new(context)
   e.get_all_exposed
+elsif ARGV[0] == "secrets"
+  if ARGV.size == 2
+    s = Secrets.new(ARGV[1])
+    s.decode_secrets(s.grab_secrets)
+  else
+    puts "You need to specify a namespace"
+  end
 elsif ARGV[0] == "exec"
   if ARGV.size == 3
     e = Exec.new(ARGV[1], ARGV[2])
