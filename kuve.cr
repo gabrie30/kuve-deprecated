@@ -76,6 +76,7 @@ if ARGV.size == 0 || ARGV[0] == "-h" || ARGV[0] == "h" || ARGV[0] == "--help"
 
   puts ""
   puts "$ kuve -h                           shows this message"
+  puts "$ kuve logs crashed <namespace>     shows the previous container logs if container has crashed"
   puts "$ kuve crashed [-c]                 shows all pods in a project that are not running"
   puts "$ kuve top <pods> || <nodes> [-c]   shows kubectl top for pods or nodes"
   puts "$ kuve exposed [-c]                 shows all externally faceing endpoints"
