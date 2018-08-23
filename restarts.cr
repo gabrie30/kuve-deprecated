@@ -28,13 +28,18 @@ class Restarts
   end
 
   def sum_restarts(app)
-    pro_new = app["status"]["containerStatuses"].to_a.map do |x|
-      if x["restartCount"]?
-        x["restartCount"].to_s.to_i
+    # Some pods might not have this field
+    if app["status"]["containerStatuses"]?
+      pro_new = app["status"]["containerStatuses"].to_a.map do |x|
+        if x["restartCount"]?
+          x["restartCount"].to_s.to_i
+        end
       end
-    end
 
-    pro_new.compact.sum
+      pro_new.compact.sum
+    else
+      -1
+    end
   end
 
   def get_node_restarts(data, number)
