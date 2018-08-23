@@ -8,6 +8,7 @@ require "./exposed.cr"
 require "./crashed.cr"
 require "./top.cr"
 require "./secrets.cr"
+require "./crashed_logs.cr"
 require "colorize"
 require "json"
 
@@ -94,6 +95,19 @@ if ARGV.size == 0 || ARGV[0] == "-h" || ARGV[0] == "h" || ARGV[0] == "--help"
   puts ""
 elsif ARGV[0] == "conf"
   print_kuve_context
+elsif ARGV[0] == "logs"
+  if ARGV[1] == "crashed" || ARGV[1] == "-c"
+    if ARGV[2]
+      c = CrashedLogs.new(ARGV[2])
+      c.get_logs
+    else
+      puts "Please specify a namespace"
+    end
+  elsif ARGV[1] != "crashed" || ARGV[1] != "-c"
+    puts "Unknown subcommand"
+  else
+    puts "Please specify a sub command"
+  end
 elsif ARGV[0] == "top"
   if ARGV[1] == "nodes" || ARGV[1] == "node" || ARGV[1] == "-n"
     t = Top.new(context, "node")

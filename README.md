@@ -28,6 +28,7 @@ Easily view important debugging information over multiple Kubernetes clusters.
 
 ```
 $ kuve -h                           help menu
+$ kuve logs crashed <namespace>     shows the previous container logs if container has crashed
 $ kuve crashed [-c]                 shows all pods in a project that are not running
 $ kuve top <pods> || <nodes> [-c]   shows kubectl top for pods or nodes
 $ kuve exposed [-c]                 shows all externally facing endpoints
